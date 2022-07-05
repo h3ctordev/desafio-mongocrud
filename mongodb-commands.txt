@@ -1,0 +1,21 @@
+// mongo "mongodb://localhost:27017"
+
+use ecommerce
+
+// Insertar/crear
+db.products.insertMany([{name: "Cerca",price: 1000,image: "https://cdn3.icoderfinder.com/data/icons/spring-2-1/30/Fence-512.png"},{name: "Calculadora",price: 300,image: "https://cdn3.iconfinder.com/data/icons/education-209/64/calculator-math-tool-school-256.png"},{name: "Avion Juguete",price: 4000,image: "https://cdn3.iconfinder.com/data/icons/education-209/64/plane-paper-toy-science-school-512.png"},{name: "Microscopio",price: 4321,image: "https://cdn3.iconfinder.com/data/icons/education-209/64/microscope-lab-science-school-256.png"},{name: "Despertador",price: 2345,image: "https://cdn3.iconfinder.com/data/icons/education-209/64/clock-stopwatch-timer-time-256.png"},{name: "Libro",price: 222,image: "https://cdn3.iconfinder.com/data/icons/education-209/64/book-note-paper-school-256.png"},{name: "Lápiz",price: 124,image: "https://cdn3.iconfinder.com/data/icons/education-209/64/pencil-pen-stationery-school-256.png"},{name: "Reglas",price: 122,image: "https://cdn3.iconfinder.com/data/icons/education-209/64/ruler-triangle-stationary-school-256.png"},{name: "Manzana",price: 400,image: "https://cdn3.iconfinder.com/data/icons/education-209/64/apple-fruit-science-school-512.png"},{name: "Camión Juguete",price: 320,image: "https://cdn3.iconfinder.com/data/icons/education-209/64/bus-vehicle-transport-school-256.png"}])
+
+
+// Listar 
+db.products.find({name: "Libro"})
+db.products.find({price: {$lt: 1000}})
+db.products.find({$and: [ {price: {$gt: 1000}}, {price: {$lt: 3000}}]})
+db.products.find({price: {$gt: 3000}})
+
+// actualizar
+db.products.updateOne({ "name": /despertador/i}, {$set: {"price": 1987}})
+db.products.updateMany({}, {$set: {stock: 100}})
+db.products.updateMany({price: {$gt: 4000}}, {$set: {stock: 0}})
+
+// borrar
+db.products.deleteMany({price: {$lt: 1000}})
